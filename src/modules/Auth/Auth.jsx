@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getClickSigninPhone } from '../../redux/auth/authSelectors';
+import {
+  getClickSigninPhone,
+  getUserName,
+  getUserEmail,
+} from '../../redux/auth/authSelectors';
 import { Formik, Form, Field } from 'formik';
 import GoogleAuth from './GoogleAuth/GoogleAuth';
 import PhoneAuth from './PhoneAuth/PhoneAuth';
@@ -9,6 +14,8 @@ import PhoneAuthForm from './PhoneAuth/PhoneAuthForm';
 import FacebookAuth from './FacebookAuth/FacebookAuth';
 // import { ReactComponent as IconGoogle } from '../../images/icon-google.svg';
 import * as Yup from 'yup';
+import { db } from '../Auth/config';
+import { collection, addDoc } from 'firebase/firestore';
 import s from './Auth.module.css';
 
 const SigninSchema = Yup.object().shape({
@@ -43,6 +50,28 @@ const Auth = ({
   const navigate = useNavigate();
 
   const isClickSigninPhone = useSelector(getClickSigninPhone);
+  const userName = useSelector(getUserName);
+  const userEmail = useSelector(getUserEmail);
+
+  // useEffect(() => {
+  // const fetchData = async () => {
+  //   if (userName && userEmail) {
+  //     const userInfo = {
+  //       displayName: userName,
+  //       email: userEmail,
+  //     };
+
+  //     try {
+  //       const docRef = await addDoc(collection(db, 'users'), userInfo);
+  //       console.log('Document written with ID: ', docRef.id);
+  //     } catch (e) {
+  //       console.error('Error adding document: ', e);
+  //     }
+  //   }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   const initialValues = isSignIn
     ? { email: '', password: '' }

@@ -2,7 +2,14 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { signInWithPopup } from 'firebase/auth';
-import { auth, provider, facebookProvider } from '../../modules/Auth/config';
+import {
+  auth,
+  provider,
+  facebookProvider,
+  db,
+} from '../../modules/Auth/config';
+import { collection, addDoc } from 'firebase/firestore';
+import { addToFirestore } from '../../servises/firestore';
 
 axios.defaults.baseURL = process.env.REACT_APP_FIREBASE_URL;
 const API_KEY = process.env.REACT_APP_FIREBASE_KEY;
@@ -15,7 +22,10 @@ const signup = createAsyncThunk(
     try {
       const { data } = await axios.post(`:signUp?key=${API_KEY}`, signUpData);
 
-      console.log('data', data);
+      addToFirestore({
+        displayName: data.displayName,
+        email: data.email,
+      });
 
       return data;
     } catch (error) {
@@ -68,6 +78,11 @@ const googleAuth = createAsyncThunk(
     try {
       const data = await signInWithPopup(auth, provider);
 
+      addToFirestore({
+        displayName: data.user.displayName,
+        email: data.user.email,
+      });
+
       return data;
     } catch (error) {
       toast.error(error.message);
@@ -86,6 +101,12 @@ const phoneNumberAuth = createAsyncThunk(
         const result = await confirmationResult.confirm(code);
         const user = result.user;
 
+        addToFirestore({
+          displayName: '',
+          email: '',
+          phoneNumber: user.phoneNumber,
+        });
+
         return user;
       }
     } catch (error) {
@@ -100,6 +121,11 @@ const facebookAuth = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await signInWithPopup(auth, facebookProvider);
+
+      addToFirestore({
+        displayName: data.user.displayName,
+        email: data.user.email,
+      });
 
       return data;
     } catch (error) {

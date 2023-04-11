@@ -38,11 +38,12 @@ const Header = () => {
   const handleLogOut = () => dispatch(logOut());
   return (
     <div className={s.container}>
-      <div onClick={onClickLogo}>
+      {token && <div>MENU</div>}
+      {/* <div onClick={onClickLogo}>
         Logo
-        {/* <Logo className={s.logo} /> */}
-      </div>
-      <div className={s.navigation}>
+        <Logo className={s.logo} />
+      </div> */}
+      {/* <div className={s.navigation}>
         <NavLink
           to="/"
           className={({ isActive }) => (isActive ? s.activeStyle : s.navItem)}
@@ -57,7 +58,7 @@ const Header = () => {
         >
           Leaderboard
         </NavLink>
-      </div>
+      </div> */}
 
       <div className={s.authContainer}>
         {!token && (
@@ -78,7 +79,6 @@ const Header = () => {
             Sign Up
           </button>
         )}
-        {/* <div>{token && <UserInfo username={userName ?? ''} />}</div> */}
         <div>
           {token && (
             <UserInfo

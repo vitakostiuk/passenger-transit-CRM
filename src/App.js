@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +10,8 @@ import Loader from './modules/Loader/Loader';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import Header from './modules/Header';
+
+import AppRoutes from './routes/index.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,13 +28,16 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Routes>
-        {/* <Route path="/" element={<HomePage />} />
+      <Suspense fallback={<Loader />}>
+        <AppRoutes />
+      </Suspense>
+      {/* <Routes> */}
+      {/* <Route path="/" element={<HomePage />} />
         <Route path="/game" element={<GamePage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} /> */}
-        <Route path="/login" element={<SignInPage />} />
+      {/* <Route path="/login" element={<SignInPage />} />
         <Route path="/register" element={<SignUpPage />} />
-      </Routes>
+      </Routes> */}
       <ToastContainer position="top-right" autoClose={3000} limit={1} />
     </div>
   );
