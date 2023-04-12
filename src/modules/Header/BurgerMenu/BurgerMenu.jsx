@@ -27,8 +27,6 @@ const BurgerMenu = ({ handleClickItem }) => {
   }, [handleClickItem]);
 
   const handleBackdropClick = e => {
-    console.log('e.target', e.target);
-    console.log('e.currentTarget', e.currentTarget);
     if (e.currentTarget === e.target) {
       handleClickItem();
     }

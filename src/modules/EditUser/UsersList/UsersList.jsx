@@ -11,7 +11,6 @@ const UsersList = ({ onClickItem }) => {
     await setIsClickBtn(prev => !prev);
     try {
       const result = await getDocsFromFirestore();
-      console.log('result', result);
       setUsersList(result);
     } catch (error) {
       console.log(error);
