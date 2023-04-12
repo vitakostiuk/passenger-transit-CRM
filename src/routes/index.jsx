@@ -13,14 +13,14 @@ import EditUsersPage from '../pages/EditUsersPage';
 import DashboardPage from '../pages/DashboardPage';
 
 import { ROUTES } from './routes.const';
+import CreateTripPage from '../pages/CreateTripPage';
 
-const ADMIN_EMAIL = 'vitagrebennik@gmail.com';
+// const ADMIN_EMAIL = 'vitagrebennik@gmail.com';
+const ADMIN_EMAIL = process.env.REACT_APP_ADMIN;
 
 const AppRoutes = () => {
   const token = useSelector(getToken);
   const email = useSelector(getUserEmail);
-  console.log('email', email);
-  console.log('ADMIN_EMAIL', ADMIN_EMAIL);
 
   const routes = [
     {
@@ -52,6 +52,10 @@ const AppRoutes = () => {
               path: ROUTES.DASHBOARD,
               element: <DashboardPage />,
             },
+            {
+              path: ROUTES.CREATE_TRIP,
+              element: <CreateTripPage />,
+            },
           ],
         },
         {
@@ -66,6 +70,10 @@ const AppRoutes = () => {
               element: <DashboardPage />,
             },
             { path: ROUTES.EDIT_USERS, element: <EditUsersPage /> },
+            {
+              path: ROUTES.CREATE_TRIP,
+              element: <CreateTripPage />,
+            },
           ],
         },
       ],

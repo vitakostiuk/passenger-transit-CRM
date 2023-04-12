@@ -1,14 +1,11 @@
 .container {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
+  display: block;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   align-items: center;
-  width: 1180px;
+  max-width: 1180px;
   height: 75px;
   padding: 13px 49px 13px 26px;
   background-color: rgba(255, 255, 255, 0.4);
@@ -17,40 +14,6 @@
   border-radius: 0px 0px 25px 25px;
   backdrop-filter: blur(12.5px);
 }
-
-.navigation {
-  display: flex;
-  align-items: center;
-  margin-right: 56px;
-}
-
-.logo {
-  margin-right: 179px;
-  cursor: pointer;
-}
-
-.navItem {
-  display: block;
-  text-align: center;
-  width: 110px;
-  text-decoration: none;
-  color: #000;
-  font-family: 'CircleRoundedAlt';
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 3;
-  text-align: center;
-}
-
-.activeStyle {
-  composes: navItem;
-  color: #fff;
-}
-
-/* .navItem:hover,
-.navItem:focus {
-  color: #fff;
-} */
 
 .authContainer {
   display: flex;

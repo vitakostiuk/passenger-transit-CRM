@@ -1,0 +1,39 @@
+.container {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  z-index: 999;
+
+  width: 200px;
+  height: 570px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 5px 20px rgba(5, 0, 255, 0.1),
+    inset 0px -3px 15px rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  background-color: #fff;
+}
+
+.navItem {
+  display: block;
+  text-align: center;
+  width: 110px;
+  text-decoration: none;
+  color: #000;
+  font-family: 'CircleRoundedAlt';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 3;
+  text-align: center;
+}
+
+.activeStyle {
+  composes: navItem;
+  color: #000;
+}
+
+.navItem:hover,
+.navItem:focus {
+  color: #4f65f1;
+}

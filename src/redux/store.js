@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authSlice from './auth/authSlice';
-// import playerSlice from './player/playerSlice';
+import tripsSlice from './trips/tripsSlice';
 
 const persistAuthConfig = {
   key: 'token',
@@ -19,15 +19,9 @@ const persistAuthConfig = {
   whitelist: ['token', 'user', 'phoneNumber'],
 };
 
-// const persistPlayerConfig = {
-//   key: 'isRoboQuizMode',
-//   storage,
-//   whitelist: ['isRoboQuizMode', 'isEngLang'],
-// };
-
 const rootReducer = combineReducers({
   auth: persistReducer(persistAuthConfig, authSlice),
-  // player: persistReducer(persistPlayerConfig, playerSlice),
+  trips: tripsSlice,
 });
 
 const store = configureStore({
@@ -39,7 +33,6 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-  // .concat(logger),
 });
 
 const persistor = persistStore(store);

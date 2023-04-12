@@ -23,7 +23,6 @@ const SignInPage = () => {
     <div>
       <div className={s.container}>
         <div className={s.paper}>
-          {' '}
           <Auth
             questionText="Need an account?"
             hash="register"

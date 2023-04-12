@@ -2,16 +2,12 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { signInWithPopup } from 'firebase/auth';
-import {
-  auth,
-  provider,
-  facebookProvider,
-  db,
-} from '../../modules/Auth/config';
-import { collection, addDoc } from 'firebase/firestore';
+import { auth, provider, facebookProvider } from '../../modules/Auth/config';
 import { addToFirestore } from '../../servises/firestore';
+import { getDocsFromFirestore } from '../../servises/firestore';
+import { isExistEmail, isExistPhone } from '../../utils/isExist';
 
-axios.defaults.baseURL = process.env.REACT_APP_FIREBASE_URL;
+const BASE_URL = process.env.REACT_APP_FIREBASE_URL;
 const API_KEY = process.env.REACT_APP_FIREBASE_KEY;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -20,11 +16,16 @@ const signup = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     const signUpData = { ...credentials, returnSecureToken: true };
     try {
-      const { data } = await axios.post(`:signUp?key=${API_KEY}`, signUpData);
+      const { data } = await axios.post(
+        `${BASE_URL}:signUp?key=${API_KEY}`,
+        signUpData
+      );
 
       addToFirestore({
         displayName: data.displayName,
         email: data.email,
+        phoneNumber: '',
+        role: 'passenger',
       });
 
       return data;
@@ -40,7 +41,7 @@ const signin = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `:signInWithPassword?key=${API_KEY}`,
+        `${BASE_URL}:signInWithPassword?key=${API_KEY}`,
         credentials
       );
 
@@ -63,7 +64,10 @@ const getUser = createAsyncThunk(
 
     try {
       const body = { idToken: persistedToken };
-      const { data } = await axios.post(`:lookup?key=${API_KEY}`, body);
+      const { data } = await axios.post(
+        `${BASE_URL}:lookup?key=${API_KEY}`,
+        body
+      );
 
       return data.users[0];
     } catch (error) {
@@ -78,10 +82,16 @@ const googleAuth = createAsyncThunk(
     try {
       const data = await signInWithPopup(auth, provider);
 
-      addToFirestore({
-        displayName: data.user.displayName,
-        email: data.user.email,
-      });
+      const isExist = await isExistEmail(data.user.email);
+
+      if (!isExist) {
+        addToFirestore({
+          displayName: data.user.displayName,
+          email: data.user.email,
+          phoneNumber: '',
+          role: 'passenger',
+        });
+      }
 
       return data;
     } catch (error) {
@@ -101,11 +111,16 @@ const phoneNumberAuth = createAsyncThunk(
         const result = await confirmationResult.confirm(code);
         const user = result.user;
 
-        addToFirestore({
-          displayName: '',
-          email: '',
-          phoneNumber: user.phoneNumber,
-        });
+        const isExist = await isExistPhone(user.phoneNumber);
+
+        if (!isExist) {
+          addToFirestore({
+            displayName: '',
+            email: '',
+            phoneNumber: user.phoneNumber,
+            role: 'passenger',
+          });
+        }
 
         return user;
       }
@@ -122,10 +137,16 @@ const facebookAuth = createAsyncThunk(
     try {
       const data = await signInWithPopup(auth, facebookProvider);
 
-      addToFirestore({
-        displayName: data.user.displayName,
-        email: data.user.email,
-      });
+      const isExist = await isExistEmail(data.user.email);
+
+      if (!isExist) {
+        addToFirestore({
+          displayName: data.user.displayName,
+          email: data.user.email,
+          phoneNumber: '',
+          role: 'passenger',
+        });
+      }
 
       return data;
     } catch (error) {

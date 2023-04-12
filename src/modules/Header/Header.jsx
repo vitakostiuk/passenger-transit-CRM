@@ -1,7 +1,6 @@
-import React from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink } from 'react-router-dom';
-// import { ReactComponent as Logo } from '../../images/main-logo1.svg';
 import {
   getUserName,
   getToken,
@@ -9,9 +8,13 @@ import {
 } from '../../redux/auth/authSelectors';
 import { logOut } from '../../redux/auth/authSlice.js';
 import UserInfo from '../UserInfo/UserInfo';
+import BurgerMenu from './BurgerMenu';
+import { CiMenuBurger } from 'react-icons/ci';
 import s from './Header.module.css';
 
 const Header = () => {
+  const [isClickBurger, setIsClickBurger] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,46 +22,18 @@ const Header = () => {
   const token = useSelector(getToken);
   const phoneNumber = useSelector(getPhoneNumber);
 
-  // Клік по home або leaderboard
-  const onClickNavItem = () => {
-    setTimeout(() => {
-      window.location.reload(false);
-    });
-  };
-
-  // Клік по логотипу
-  const onClickLogo = () => {
-    navigate('/');
-
-    setTimeout(() => {
-      window.location.reload(false);
-    });
+  const toggleBurger = e => {
+    setIsClickBurger(prev => !prev);
   };
 
   const handleLogOut = () => dispatch(logOut());
   return (
     <div className={s.container}>
-      {token && <div>MENU</div>}
-      {/* <div onClick={onClickLogo}>
-        Logo
-        <Logo className={s.logo} />
-      </div> */}
-      {/* <div className={s.navigation}>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? s.activeStyle : s.navItem)}
-          onClick={onClickNavItem}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/leaderboard"
-          className={({ isActive }) => (isActive ? s.activeStyle : s.navItem)}
-          onClick={onClickNavItem}
-        >
-          Leaderboard
-        </NavLink>
-      </div> */}
+      {token && (
+        <CiMenuBurger onClick={toggleBurger} color="#4f65f1" size="34" />
+      )}
+
+      {isClickBurger && <BurgerMenu handleClickItem={toggleBurger} />}
 
       <div className={s.authContainer}>
         {!token && (

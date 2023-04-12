@@ -35,38 +35,13 @@ const PhoneAuthForm = () => {
       let appVerifier = window.recaptchaVerifier;
       signInWithPhoneNumber(auth, phoneNumber, appVerifier)
         .then(confirmationResult => {
-          console.log('confirmationResult', confirmationResult);
           window.confirmationResult = confirmationResult;
         })
         .catch(error => {
           toast.error('Too many requests. Try again later');
-          console.log(error);
         });
     }
   };
-
-  // const verifySecretCode = e => {
-  //   const code = e.target.value;
-  //   setSecretCode(code);
-
-  //   if (code.length === 6) {
-  //     console.log(code);
-  //     // verify code
-  //     const confirmationResult = window.confirmationResult;
-  //     confirmationResult
-  //       .confirm(code)
-  //       .then(result => {
-  //         // User signed in successfully.
-  //         const user = result.user;
-  //         console.log('user', user);
-  //         // ...
-  //       })
-  //       .catch(error => {
-  //         // User couldn't sign in (bad verification code?)
-  //         // ...
-  //       });
-  //   }
-  // };
 
   const verifySecretCode = e => {
     setSecretCode(e.target.value);
