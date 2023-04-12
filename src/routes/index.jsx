@@ -10,12 +10,10 @@ import AdminRoute from '../modules/wrappers/AdminRoute';
 import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
 import EditUsersPage from '../pages/EditUsersPage';
-import DashboardPage from '../pages/DashboardPage';
 
 import { ROUTES } from './routes.const';
 import CreateTripPage from '../pages/CreateTripPage';
 
-// const ADMIN_EMAIL = 'vitagrebennik@gmail.com';
 const ADMIN_EMAIL = process.env.REACT_APP_ADMIN;
 
 const AppRoutes = () => {
@@ -49,10 +47,6 @@ const AppRoutes = () => {
           ),
           children: [
             {
-              path: ROUTES.DASHBOARD,
-              element: <DashboardPage />,
-            },
-            {
               path: ROUTES.CREATE_TRIP,
               element: <CreateTripPage />,
             },
@@ -65,10 +59,6 @@ const AppRoutes = () => {
             </AdminRoute>
           ),
           children: [
-            {
-              path: ROUTES.DASHBOARD,
-              element: <DashboardPage />,
-            },
             { path: ROUTES.EDIT_USERS, element: <EditUsersPage /> },
             {
               path: ROUTES.CREATE_TRIP,

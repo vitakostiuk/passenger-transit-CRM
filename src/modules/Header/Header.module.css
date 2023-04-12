@@ -1,10 +1,11 @@
 .container {
   display: block;
   margin: 0 auto;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+
   max-width: 1180px;
   height: 75px;
   padding: 13px 49px 13px 26px;
@@ -15,66 +16,16 @@
   backdrop-filter: blur(12.5px);
 }
 
-.authContainer {
-  display: flex;
-  align-items: center;
+.containerWithBurger {
+  composes: container;
   justify-content: space-between;
 }
 
-.btnsWrap {
+.authContainer {
   display: flex;
   align-items: center;
 }
 
 .signin {
-  padding: 8px;
-  font-family: 'CircleRoundedAlt';
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 3;
-  text-align: center;
-  background-color: transparent;
-  color: #000;
-  border: none;
-  cursor: pointer;
-}
-
-.signup {
-  composes: signin;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 101px;
-  height: 30px;
-  color: #fff;
-  background-color: #000;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-
-.logout {
-  composes: signup;
-  background-color: transparent;
-  border: 2px solid #000;
-  color: #000;
-}
-
-.language {
-  composes: signup;
-  width: 75px;
-  background-color: transparent;
-  color: #000;
-  border: 2px solid #000;
-  border-radius: 5px;
-  margin-left: 44px;
-}
-
-.navBarContainer {
-  background-color: transparent !important;
-  border: 1px solid green;
-}
-
-.navBar {
-  background-color: transparent;
-  border: 1px solid red !important;
+  margin-right: 20px;
 }

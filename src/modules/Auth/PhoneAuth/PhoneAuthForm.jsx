@@ -5,7 +5,8 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { phoneNumberAuth } from '../../../redux/auth/authOperations';
 import 'firebase/compat/auth';
 import { toast } from 'react-toastify';
-import s from '../Auth.module.css';
+import { Button, Form } from 'bootstrap-4-react';
+import s from './PhoneAuthForm.module.css';
 
 const PhoneAuthForm = () => {
   const countryCode = '+380';
@@ -49,40 +50,44 @@ const PhoneAuthForm = () => {
   };
 
   return (
-    <form onSubmit={requestSectretCode}>
-      <label className={s.label} htmlFor="phone">
-        Phone number
-      </label>
-      <input
-        id="phone"
-        className={s.input}
-        name="phone"
-        type="text"
-        placeholder="Enter your phone number"
-        value={phoneNumber}
-        onChange={e => setPhoneNumber(e.target.value)}
-      />
-      {expandForm ? (
-        <>
-          <label className={s.label} htmlFor="phone">
-            Secret code
-          </label>
-          <input
-            id="code"
-            className={s.input}
-            name="code"
-            type="text"
-            placeholder="Enter the code sent to your phone"
-            value={secretCode}
-            onChange={verifySecretCode}
-          />
-        </>
-      ) : null}
+    <Form onSubmit={requestSectretCode} className={s.form}>
+      <Form.Group>
+        <label className={s.label} htmlFor="phone">
+          Phone number
+        </label>
+        <Form.Input
+          id="phone"
+          name="phone"
+          type="text"
+          placeholder="Enter your phone number"
+          value={phoneNumber}
+          onChange={e => setPhoneNumber(e.target.value)}
+        />
+        {expandForm ? (
+          <>
+            <label className={s.label} htmlFor="phone">
+              Secret code
+            </label>
+            <Form.Input
+              id="code"
+              name="code"
+              type="text"
+              placeholder="Enter the code sent to your phone"
+              value={secretCode}
+              onChange={verifySecretCode}
+            />
+          </>
+        ) : null}
 
-      {!expandForm && <button type="submit">Request secret code</button>}
+        {!expandForm && (
+          <Button primary lg type="submit" className={s.button}>
+            Request secret code
+          </Button>
+        )}
 
-      <div id="recaptcha-container"></div>
-    </form>
+        <div id="recaptcha-container"></div>
+      </Form.Group>
+    </Form>
   );
 };
 

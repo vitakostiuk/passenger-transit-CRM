@@ -1,14 +1,14 @@
-import React from 'react';
 import CreateTrip from '../modules/CreateTrip';
-import s from './Pages.module.css';
+import Container from '../modules/common/Container';
+import Paper from '../modules/common/Paper';
 
 const CreateTripPage = () => {
   return (
-    <div className={s.container}>
-      <div className={s.paper}>
+    <Container>
+      <Paper>
         <CreateTrip />
-      </div>
-    </div>
+      </Paper>
+    </Container>
   );
 };
 

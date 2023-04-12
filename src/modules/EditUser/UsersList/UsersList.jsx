@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { getDocsFromFirestore } from '../../../servises/firestore';
+import { Button, ListGroup } from 'bootstrap-4-react';
+import s from './UserList.module.css';
 
 const UsersList = ({ onClickItem }) => {
   const [isClickBtn, setIsClickBtn] = useState(false);
@@ -29,25 +31,25 @@ const UsersList = ({ onClickItem }) => {
   };
 
   return (
-    <>
-      <button type="button" onClick={handleClickBtn}>
+    <div className={s.container}>
+      <Button primary lg type="button" onClick={handleClickBtn}>
         See all users
-      </button>
+      </Button>
       {isClickBtn && usersList && (
-        <ul>
+        <ListGroup>
           {usersList.map(({ displayName, email, phoneNumber, role, id }) => (
-            <li
+            <ListGroup.Link
               key={email}
               onClick={() =>
                 handleClickItem(displayName, email, phoneNumber, role, id)
               }
             >
               {email ? email : phoneNumber}
-            </li>
+            </ListGroup.Link>
           ))}
-        </ul>
+        </ListGroup>
       )}
-    </>
+    </div>
   );
 };
 

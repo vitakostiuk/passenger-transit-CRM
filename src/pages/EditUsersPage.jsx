@@ -1,10 +1,14 @@
 import EditUser from '../modules/EditUser/EditUser';
+import Container from '../modules/common/Container';
+import Paper from '../modules/common/Paper';
 
 const EditUsersPage = () => {
   return (
-    <div>
-      <EditUser />
-    </div>
+    <Container>
+      <Paper>
+        <EditUser />
+      </Paper>
+    </Container>
   );
 };
 

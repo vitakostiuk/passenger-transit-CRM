@@ -4,7 +4,7 @@ import { ROUTES } from '../../../routes/routes.const';
 
 const PublicRoute = ({ isAuth, isAdmin, children }) => {
   if (isAuth && !isAdmin) {
-    return <Navigate to={ROUTES.DASHBOARD} replace />;
+    return <Navigate to={ROUTES.CREATE_TRIP} replace />;
   }
 
   if (isAuth && isAdmin) {

@@ -19,37 +19,10 @@
   text-align: center;
 }
 
-.google {
-  display: block;
-  margin: 0 auto;
-  margin-top: 15px;
-  width: 100px;
-  height: 38px;
-
+.socialWrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 8px;
-  font-size: 15px;
-  background-color: transparent;
-  color: #000;
-  border: 1px solid #a1a5be;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.googleLogin {
+  justify-content: space-around;
   margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  /* border: 1px solid red; */
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 7px;
 }
 
 .orText {
@@ -157,20 +130,6 @@
 
 .bigButton {
   width: 100%;
-  height: 45px;
-  padding: 8px;
-  background-color: #88cbfc;
-  color: #f3f5f8;
-  text-transform: uppercase;
-  font-size: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-}
-
-.bigButton:disabled {
-  background-color: #a1a5be;
-  color: #fff;
 }
 
 .questionContainr {
@@ -182,30 +141,6 @@
 
 .questionText {
   margin-right: 5px;
-  font-size: 15px;
-  color: #a1a5be;
-}
-
-.reset {
-  composes: questionText;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.questionBtn {
-  width: 80px;
-  height: 30px;
-  margin-left: 5px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 8px;
-  font-size: 15px;
-  background-color: transparent;
-  color: #a1a5be;
-  border: 1px solid #a1a5be;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-bottom: 0;
+  color: #6c757d;
 }

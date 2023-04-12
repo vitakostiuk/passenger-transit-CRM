@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createTrip } from '../../redux/trips/tripsOperations';
-import s from '../Auth/Auth.module.css';
+
+import { Button, Form } from 'bootstrap-4-react';
+import s from './CreateTrip.module.css';
 
 const CreateTrip = () => {
   const [carNumber, setCarNumber] = useState('');
@@ -32,66 +34,75 @@ const CreateTrip = () => {
   const isDisabledBtn =
     !carNumber || !startingPoint || !endingPoint || !passengerCount;
   return (
-    <div>
-      <div>Create Trip</div>
-      <form onSubmit={handleSubmit}>
-        <label className={s.label} htmlFor="car_number">
-          Car number
-        </label>
-        <input
-          id="car_number"
-          className={s.input}
-          name="car_number"
-          type="text"
-          placeholder="Enter car number"
-          value={carNumber}
-          onChange={e => setCarNumber(e.target.value)}
-        />
+    <div className={s.wrapper}>
+      <div className={s.container}>
+        <div className={s.title}>Create Trip</div>
+        <Form onSubmit={handleSubmit} className={s.form}>
+          <Form.Group>
+            <label className={s.label} htmlFor="car_number">
+              Car number
+            </label>
+            <Form.Input
+              id="car_number"
+              name="car_number"
+              type="text"
+              placeholder="Enter car number"
+              value={carNumber}
+              onChange={e => setCarNumber(e.target.value)}
+              className={s.input}
+            />
 
-        <label className={s.label} htmlFor="start">
-          Starting point
-        </label>
-        <input
-          id="start"
-          className={s.input}
-          name="start"
-          type="text"
-          placeholder="Enter the starting point"
-          value={startingPoint}
-          onChange={e => setStartingPoint(e.target.value)}
-        />
-        <label className={s.label} htmlFor="end">
-          Ending point
-        </label>
-        <input
-          id="end"
-          className={s.input}
-          name="end"
-          type="text"
-          placeholder="Enter the ending point"
-          value={endingPoint}
-          onChange={e => setEndingPoint(e.target.value)}
-        />
+            <label className={s.label} htmlFor="start">
+              Starting point
+            </label>
+            <Form.Input
+              id="start"
+              name="start"
+              type="text"
+              placeholder="Enter the starting point"
+              value={startingPoint}
+              onChange={e => setStartingPoint(e.target.value)}
+              className={s.input}
+            />
+            <label className={s.label} htmlFor="end">
+              Ending point
+            </label>
+            <Form.Input
+              id="end"
+              name="end"
+              type="text"
+              placeholder="Enter the ending point"
+              value={endingPoint}
+              onChange={e => setEndingPoint(e.target.value)}
+              className={s.input}
+            />
 
-        <label className={s.label} htmlFor="passenger_count">
-          Passenger count
-        </label>
-        <input
-          id="passenger_count"
-          className={s.input}
-          name="passenger_count"
-          type="number"
-          placeholder="Enter passenger count"
-          value={passengerCount}
-          onChange={e => setPassengerCount(e.target.value)}
-          max={4}
-          min={0}
-        />
+            <label className={s.label} htmlFor="passenger_count">
+              Passenger count
+            </label>
+            <Form.Input
+              id="passenger_count"
+              name="passenger_count"
+              type="number"
+              placeholder="Enter passenger count"
+              value={passengerCount}
+              onChange={e => setPassengerCount(e.target.value)}
+              className={s.input}
+            />
 
-        <button disabled={isDisabledBtn} type="submit">
-          Create Trip
-        </button>
-      </form>
+            <Button
+              primary
+              lg
+              disabled={isDisabledBtn}
+              type="submit"
+              variant="outline-success"
+              className={s.button}
+            >
+              Create Trip
+            </Button>
+          </Form.Group>
+        </Form>
+      </div>
     </div>
   );
 };

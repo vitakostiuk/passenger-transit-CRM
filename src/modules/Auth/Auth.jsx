@@ -1,21 +1,16 @@
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  getClickSigninPhone,
-  getUserName,
-  getUserEmail,
-} from '../../redux/auth/authSelectors';
+import { getClickSigninPhone } from '../../redux/auth/authSelectors';
 import { Formik, Form, Field } from 'formik';
-import GoogleAuth from './GoogleAuth/GoogleAuth';
-import PhoneAuth from './PhoneAuth/PhoneAuth';
+import GoogleAuth from './GoogleAuth';
+import PhoneAuth from './PhoneAuth';
 import PhoneAuthForm from './PhoneAuth/PhoneAuthForm';
-import FacebookAuth from './FacebookAuth/FacebookAuth';
-// import { ReactComponent as IconGoogle } from '../../images/icon-google.svg';
+import FacebookAuth from './FacebookAuth';
+import { Lead } from 'bootstrap-4-react';
 import * as Yup from 'yup';
-import { db } from '../Auth/config';
-import { collection, addDoc } from 'firebase/firestore';
+
+import { Button } from 'bootstrap-4-react';
 import s from './Auth.module.css';
 
 const SigninSchema = Yup.object().shape({
@@ -45,33 +40,12 @@ const Auth = ({
   buttonText,
   buttonTextToNavigate,
   handleSetCredentials,
+  titleText,
   isSignIn,
 }) => {
   const navigate = useNavigate();
 
   const isClickSigninPhone = useSelector(getClickSigninPhone);
-  const userName = useSelector(getUserName);
-  const userEmail = useSelector(getUserEmail);
-
-  // useEffect(() => {
-  // const fetchData = async () => {
-  //   if (userName && userEmail) {
-  //     const userInfo = {
-  //       displayName: userName,
-  //       email: userEmail,
-  //     };
-
-  //     try {
-  //       const docRef = await addDoc(collection(db, 'users'), userInfo);
-  //       console.log('Document written with ID: ', docRef.id);
-  //     } catch (e) {
-  //       console.error('Error adding document: ', e);
-  //     }
-  //   }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const initialValues = isSignIn
     ? { email: '', password: '' }
@@ -80,9 +54,8 @@ const Auth = ({
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
-        <h1 className={s.title}>Sign in to Transit CRM</h1>
-        <div className={s.googleLogin}>
-          {' '}
+        <h1 className={s.title}>{titleText}</h1>
+        <div className={s.socialWrapper}>
           <GoogleAuth />
           <PhoneAuth />
           <FacebookAuth />
@@ -158,18 +131,20 @@ const Auth = ({
                 ) : null}
 
                 <div>
-                  <button className={s.bigButton} type="submit">
+                  <Button primary className={s.bigButton} type="submit">
                     {buttonText}
-                  </button>
+                  </Button>
                   <div className={s.questionContainr}>
                     <p className={s.questionText}>{questionText}</p>
-                    <button
-                      className={s.questionBtn}
+                    <Button
+                      // className={s.questionBtn}
+                      secondary
+                      outline
                       type="button"
                       onClick={() => navigate(`/${hash}`)}
                     >
                       {buttonTextToNavigate}
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </Form>

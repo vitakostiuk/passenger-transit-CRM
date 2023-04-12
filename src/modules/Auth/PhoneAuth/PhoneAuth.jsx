@@ -1,16 +1,18 @@
 import { useDispatch } from 'react-redux';
 import { setClickPhone } from '../../../redux/auth/authSlice';
+import { Button } from 'bootstrap-4-react';
+import { FaPhone } from 'react-icons/fa';
 
 const PhoneAuth = () => {
   const dispatch = useDispatch();
 
   const handlePhoneSignIn = () => {
-    dispatch(setClickPhone());
+    dispatch(setClickPhone(true));
   };
   return (
-    <button type="button" onClick={handlePhoneSignIn}>
-      Sign In with Phone Number
-    </button>
+    <Button light type="button" onClick={handlePhoneSignIn}>
+      <FaPhone size={40} color="#4f65f1" />
+    </Button>
   );
 };
 

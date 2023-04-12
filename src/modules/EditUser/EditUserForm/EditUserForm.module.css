@@ -1,8 +1,6 @@
 .wrapper {
   width: 350px;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .container {
@@ -19,11 +17,6 @@
   text-align: center;
 }
 
-.label {
-  font-size: 15px;
-  color: #000;
-}
-
 .input {
   margin-bottom: 15px;
 }
@@ -31,4 +24,8 @@
 .button {
   display: block;
   margin: 0 auto;
+}
+
+.form {
+  margin-top: 15px;
 }

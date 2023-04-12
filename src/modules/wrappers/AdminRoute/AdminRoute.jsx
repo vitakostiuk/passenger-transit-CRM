@@ -8,7 +8,7 @@ const AdminRoute = ({ isAuth, isAdmin, children }) => {
   }
 
   if (isAuth && !isAdmin) {
-    return <Navigate to={ROUTES.DASHBOARD} replace />;
+    return <Navigate to={ROUTES.CREATE_TRIP} replace />;
   }
 
   return children;

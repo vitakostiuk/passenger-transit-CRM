@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { signin } from '../redux/auth/authOperations';
 import Auth from '../modules/Auth';
-import s from './Pages.module.css';
+import Container from '../modules/common/Container';
+import Paper from '../modules/common/Paper';
 
 const SignInPage = () => {
   const [credentials, setCredentials] = useState(null);
@@ -20,20 +20,19 @@ const SignInPage = () => {
     setCredentials(data);
   };
   return (
-    <div>
-      <div className={s.container}>
-        <div className={s.paper}>
-          <Auth
-            questionText="Need an account?"
-            hash="register"
-            buttonText="Sign In"
-            buttonTextToNavigate="Sign Up"
-            handleSetCredentials={handleSetCredentials}
-            isSignIn
-          />
-        </div>
-      </div>
-    </div>
+    <Container>
+      <Paper>
+        <Auth
+          questionText="Need an account?"
+          hash="register"
+          buttonText="Sign In"
+          buttonTextToNavigate="Sign Up"
+          handleSetCredentials={handleSetCredentials}
+          titleText="Sign in to Transit CRM"
+          isSignIn
+        />
+      </Paper>
+    </Container>
   );
 };
 

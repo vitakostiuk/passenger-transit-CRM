@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   getUserName,
   getToken,
@@ -10,6 +10,8 @@ import { logOut } from '../../redux/auth/authSlice.js';
 import UserInfo from '../UserInfo/UserInfo';
 import BurgerMenu from './BurgerMenu';
 import { CiMenuBurger } from 'react-icons/ci';
+
+import { Button } from 'bootstrap-4-react';
 import s from './Header.module.css';
 
 const Header = () => {
@@ -28,7 +30,7 @@ const Header = () => {
 
   const handleLogOut = () => dispatch(logOut());
   return (
-    <div className={s.container}>
+    <div className={token ? s.containerWithBurger : s.container}>
       {token && (
         <CiMenuBurger onClick={toggleBurger} color="#4f65f1" size="34" />
       )}
@@ -37,22 +39,20 @@ const Header = () => {
 
       <div className={s.authContainer}>
         {!token && (
-          <button
+          <Button
             className={s.signin}
+            dark
+            outline
             type="button"
             onClick={() => navigate('/login')}
           >
             Sign In
-          </button>
+          </Button>
         )}
         {!token && (
-          <button
-            className={s.signup}
-            type="button"
-            onClick={() => navigate('/register')}
-          >
+          <Button dark type="button" onClick={() => navigate('/register')}>
             Sign Up
-          </button>
+          </Button>
         )}
         <div>
           {token && (
@@ -63,9 +63,9 @@ const Header = () => {
         </div>
 
         {token && (
-          <button className={s.logout} type="button" onClick={handleLogOut}>
+          <Button dark outline type="button" onClick={handleLogOut}>
             Logout
-          </button>
+          </Button>
         )}
       </div>
     </div>

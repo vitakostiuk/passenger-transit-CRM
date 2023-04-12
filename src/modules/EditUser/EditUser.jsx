@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import UsersList from './UsersList/UsersList';
 import EditUserForm from './EditUserForm/EditUserForm';
+import s from './EditUser.module.css';
 
 const EditUser = () => {
   const [isUpdated, setIsUpdated] = useState(false);
@@ -15,7 +16,7 @@ const EditUser = () => {
     setIsUpdated(true);
   };
   return (
-    <div>
+    <div className={s.container}>
       <UsersList onClickItem={onClickItem} />
       {userInfo && !isUpdated && (
         <EditUserForm userInfo={userInfo} handleUpdateUser={handleUpdateUser} />

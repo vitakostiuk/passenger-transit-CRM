@@ -1,0 +1,10 @@
+.paper {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  padding: 50px;
+  width: 1180px;
+  min-height: 530px;
+  background-color: #fff;
+  border-radius: 25px;
+}
