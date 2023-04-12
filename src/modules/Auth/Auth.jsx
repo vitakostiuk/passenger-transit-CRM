@@ -7,7 +7,6 @@ import GoogleAuth from './GoogleAuth';
 import PhoneAuth from './PhoneAuth';
 import PhoneAuthForm from './PhoneAuth/PhoneAuthForm';
 import FacebookAuth from './FacebookAuth';
-import { Lead } from 'bootstrap-4-react';
 import * as Yup from 'yup';
 
 import { Button } from 'bootstrap-4-react';

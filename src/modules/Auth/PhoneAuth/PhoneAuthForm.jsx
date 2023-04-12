@@ -56,6 +56,7 @@ const PhoneAuthForm = () => {
           Phone number
         </label>
         <Form.Input
+          className={s.input}
           id="phone"
           name="phone"
           type="text"
@@ -66,13 +67,14 @@ const PhoneAuthForm = () => {
         {expandForm ? (
           <>
             <label className={s.label} htmlFor="phone">
-              Secret code
+              Enter the code sent to your phone
             </label>
             <Form.Input
+              className={s.input}
               id="code"
               name="code"
               type="text"
-              placeholder="Enter the code sent to your phone"
+              placeholder="Secret code"
               value={secretCode}
               onChange={verifySecretCode}
             />

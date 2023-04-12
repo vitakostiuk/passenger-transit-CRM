@@ -7,7 +7,7 @@ const PhoneAuth = () => {
   const dispatch = useDispatch();
 
   const handlePhoneSignIn = () => {
-    dispatch(setClickPhone(true));
+    dispatch(setClickPhone());
   };
   return (
     <Button light type="button" onClick={handlePhoneSignIn}>

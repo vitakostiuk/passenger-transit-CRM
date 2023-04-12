@@ -25,7 +25,7 @@ const authSlice = createSlice({
   reducers: {
     logOut: () => initialState,
     setClickPhone: (state, { payload }) => {
-      state.isClickSigninPhone = payload;
+      state.isClickSigninPhone = true;
     },
   },
   extraReducers: builder => {

@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider, facebookProvider } from '../../modules/Auth/config';
 import { addToFirestore } from '../../servises/firestore';
-import { getDocsFromFirestore } from '../../servises/firestore';
 import { isExistEmail, isExistPhone } from '../../utils/isExist';
 
 const BASE_URL = process.env.REACT_APP_FIREBASE_URL;
