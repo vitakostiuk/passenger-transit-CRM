@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getLoading } from '../../../redux/auth/authSelectors';
 import { updateDataInFirestore } from '../../../servises/firestore';
+import Loader from '../../Loader/Loader';
 import { Button, Form } from 'bootstrap-4-react';
 import s from './EditUserForm.module.css';
 
@@ -9,6 +12,8 @@ const EditUserForm = ({ userInfo, handleUpdateUser }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [role, setRole] = useState('');
   const [userID, setUserID] = useState('');
+
+  const isLoading = useSelector(getLoading);
 
   useEffect(() => {
     setDisplayName(userInfo.displayName);
@@ -45,6 +50,8 @@ const EditUserForm = ({ userInfo, handleUpdateUser }) => {
 
   return (
     <div className={s.wrapper}>
+      {isLoading && <Loader />}
+
       <div className={s.container}>
         <div className={s.title}>Edit User Info</div>
         <Form onSubmit={handleSubmit} className={s.form}>

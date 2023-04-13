@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createTrip } from '../../redux/trips/tripsOperations';
+import { getLoading } from '../../redux/auth/authSelectors';
+import Loader from '../Loader/Loader';
 
 import { Button, Form } from 'bootstrap-4-react';
 import s from './CreateTrip.module.css';
@@ -10,6 +12,8 @@ const CreateTrip = () => {
   const [startingPoint, setStartingPoint] = useState('');
   const [endingPoint, setEndingPoint] = useState('');
   const [passengerCount, setPassengerCount] = useState('');
+
+  const isLoading = useSelector(getLoading);
 
   const dispatch = useDispatch();
 
@@ -35,6 +39,8 @@ const CreateTrip = () => {
     !carNumber || !startingPoint || !endingPoint || !passengerCount;
   return (
     <div className={s.wrapper}>
+      {isLoading && <Loader />}
+
       <div className={s.container}>
         <div className={s.title}>Create Trip</div>
         <Form onSubmit={handleSubmit} className={s.form}>

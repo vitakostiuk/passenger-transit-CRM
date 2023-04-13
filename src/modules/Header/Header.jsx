@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,7 +13,7 @@ import UserInfo from '../UserInfo/UserInfo';
 import BurgerMenu from './BurgerMenu';
 import { CiMenuBurger } from 'react-icons/ci';
 
-import { Button } from 'bootstrap-4-react';
+import Bootstrap, { Button } from 'bootstrap-4-react';
 import s from './Header.module.css';
 
 const Header = () => {

@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getLoading } from '../../../redux/auth/authSelectors';
+import Loader from '../../Loader/Loader';
 import { getDocsFromFirestore } from '../../../servises/firestore';
 import { Button, ListGroup } from 'bootstrap-4-react';
 import s from './UserList.module.css';
@@ -7,8 +10,10 @@ const UsersList = ({ onClickItem }) => {
   const [isClickBtn, setIsClickBtn] = useState(false);
   const [usersList, setUsersList] = useState(null);
 
+  const isLoading = useSelector(getLoading);
+
   const handleClickBtn = async () => {
-    await setIsClickBtn(prev => !prev);
+    setIsClickBtn(prev => !prev);
     try {
       const result = await getDocsFromFirestore();
       setUsersList(result);
@@ -31,6 +36,8 @@ const UsersList = ({ onClickItem }) => {
 
   return (
     <div className={s.container}>
+      {isLoading && <Loader />}
+
       <Button primary lg type="button" onClick={handleClickBtn}>
         See all users
       </Button>

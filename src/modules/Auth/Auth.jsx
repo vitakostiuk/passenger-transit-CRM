@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getClickSigninPhone } from '../../redux/auth/authSelectors';
+import {
+  getClickSigninPhone,
+  getLoading,
+} from '../../redux/auth/authSelectors';
 import { Formik, Form, Field } from 'formik';
+import Loader from '../Loader/Loader';
 import GoogleAuth from './GoogleAuth';
 import PhoneAuth from './PhoneAuth';
 import PhoneAuthForm from './PhoneAuth/PhoneAuthForm';
@@ -44,6 +48,8 @@ const Auth = ({
 }) => {
   const navigate = useNavigate();
 
+  const isLoading = useSelector(getLoading);
+
   const isClickSigninPhone = useSelector(getClickSigninPhone);
 
   const initialValues = isSignIn
@@ -52,6 +58,8 @@ const Auth = ({
 
   return (
     <div className={s.wrapper}>
+      {isLoading && <Loader />}
+
       <div className={s.container}>
         <h1 className={s.title}>{titleText}</h1>
         <div className={s.socialWrapper}>
