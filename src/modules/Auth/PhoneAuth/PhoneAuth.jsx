@@ -6,8 +6,8 @@ import { FaPhone } from 'react-icons/fa';
 const PhoneAuth = () => {
   const dispatch = useDispatch();
 
-  const handlePhoneSignIn = () => {
-    dispatch(setClickPhone());
+  const handlePhoneSignIn = e => {
+    dispatch(setClickPhone(true));
   };
   return (
     <Button light type="button" onClick={handlePhoneSignIn}>

@@ -6,7 +6,7 @@ import {
   getToken,
   getPhoneNumber,
 } from '../../redux/auth/authSelectors';
-import { logOut } from '../../redux/auth/authSlice.js';
+import { logOut, setClickPhone } from '../../redux/auth/authSlice.js';
 import UserInfo from '../UserInfo/UserInfo';
 import BurgerMenu from './BurgerMenu';
 import { CiMenuBurger } from 'react-icons/ci';
@@ -29,6 +29,17 @@ const Header = () => {
   };
 
   const handleLogOut = () => dispatch(logOut());
+
+  const handleSignin = () => {
+    dispatch(setClickPhone(false));
+    navigate('/login');
+  };
+
+  const handleSignOut = () => {
+    dispatch(setClickPhone(false));
+    navigate('/register');
+  };
+
   return (
     <div className={token ? s.containerWithBurger : s.container}>
       {token && (
@@ -44,13 +55,13 @@ const Header = () => {
             dark
             outline
             type="button"
-            onClick={() => navigate('/login')}
+            onClick={handleSignin}
           >
             Sign In
           </Button>
         )}
         {!token && (
-          <Button dark type="button" onClick={() => navigate('/register')}>
+          <Button dark type="button" onClick={handleSignOut}>
             Sign Up
           </Button>
         )}
